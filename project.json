@@ -1,0 +1,23 @@
+{
+  "overview": "ReviewGuard AI is a fake product review detection platform powered by AI. Users can analyze reviews by pasting text, uploading website screenshots (OCR + image authenticity check), or entering product page URLs (bulk analysis of all reviews grouped by verdict). All analyses are saved per user with separate history tabs, and a dashboard tracks usage statistics.",
+  "features": [
+    "Text review analysis with AI-powered fake detection",
+    "Image screenshot analysis with OCR and image manipulation detection",
+    "Product URL analysis fetching and analyzing all reviews on a page",
+    "Separate history tabs for Text, Image, and URL analyses",
+    "Dashboard with stats: total analyses, fake vs genuine counts",
+    "Secure login via Internet Identity",
+    "Verdict grouping (genuine/suspicious/fake) with confidence scores"
+  ],
+  "category": "productivity",
+  "tags": [
+    "ai",
+    "fake-reviews",
+    "review-detection",
+    "ocr",
+    "url-analysis",
+    "image-analysis",
+    "dashboard"
+  ],
+  "last_updated": "2026-04-16T10:52:29.747Z"
+}

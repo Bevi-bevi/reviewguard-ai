@@ -1,0 +1,72 @@
+// Version: 1.0.0
+type AnalysisId__627167302 = Nat;
+type AnalysisRecordV2__1022655238 =
+  {
+    analysisType : AnalysisType__237315095;
+    confidenceScore : Nat;
+    explanation : Text;
+    id : AnalysisId__627167302;
+    imageKey : ?Text;
+    isFake : Bool;
+    reviewText : Text;
+    sourceUrl : ?Text;
+    timestamp : Timestamp__301639476;
+    userId : UserId__158757552
+  };
+type AnalysisRecord__428075329 =
+  {
+    confidenceScore : Nat;
+    explanation : Text;
+    id : AnalysisId__627167302;
+    isFake : Bool;
+    reviewText : Text;
+    timestamp : Timestamp__301639476;
+    userId : UserId__158757552
+  };
+type AnalysisType__237315095 = {#Image; #Text; #URL};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Principal;
+type UserRole__1054455867 = {#admin; #guest; #user};
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1054455867>
+    };
+  stable analysisStore :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<AnalysisRecord__428075329>>;
+      var size : Nat__490723111
+    };
+  stable analysisStoreV2 :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<AnalysisRecordV2__1022655238>>;
+      var size : Nat__490723111
+    };
+  stable nextIdRef : {var value : Nat};
+  stable var nextIdValue : Nat
+};

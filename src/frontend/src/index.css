@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Bricolage Grotesque";
+    --font-body: "DM Sans";
+    --font-mono: "Geist Mono";
+    --radius: 0.625rem;
+
+    --background: 0.98 0 0;
+    --foreground: 0.12 0 0;
+    --card: 0.99 0 0;
+    --card-foreground: 0.12 0 0;
+    --popover: 0.99 0 0;
+    --popover-foreground: 0.12 0 0;
+
+    --primary: 0.72 0.15 190;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.7 0.16 55;
+    --secondary-foreground: 0.12 0 0;
+    --muted: 0.92 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.6 0.16 190;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.6 0.18 22;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.88 0 0;
+    --input: 0.88 0 0;
+    --ring: 0.6 0.16 190;
+
+    --chart-1: 0.6 0.16 190;
+    --chart-2: 0.7 0.16 55;
+    --chart-3: 0.6 0.18 22;
+    --chart-4: 0.65 0.12 130;
+    --chart-5: 0.55 0.14 85;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.12 0 0;
+    --sidebar-primary: 0.6 0.16 190;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.92 0 0;
+    --sidebar-accent-foreground: 0.25 0 0;
+    --sidebar-border: 0.88 0 0;
+    --sidebar-ring: 0.6 0.16 190;
+  }
+
+  .dark {
+    --background: 0.12 0 0;
+    --foreground: 0.95 0 0;
+    --card: 0.15 0 0;
+    --card-foreground: 0.95 0 0;
+    --popover: 0.18 0 0;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.6 0.16 190;
+    --primary-foreground: 0.12 0 0;
+
+    --secondary: 0.7 0.16 55;
+    --secondary-foreground: 0.12 0 0;
+    --muted: 0.22 0 0;
+    --muted-foreground: 0.65 0 0;
+
+    --accent: 0.65 0.16 190;
+    --accent-foreground: 0.12 0 0;
+
+    --destructive: 0.62 0.18 22;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.22 0 0;
+    --input: 0.22 0 0;
+    --ring: 0.65 0.16 190;
+
+    --chart-1: 0.6 0.16 190;
+    --chart-2: 0.7 0.16 55;
+    --chart-3: 0.62 0.18 22;
+    --chart-4: 0.65 0.12 130;
+    --chart-5: 0.7 0.16 55;
+
+    --sidebar: 0.15 0 0;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.65 0.16 190;
+    --sidebar-primary-foreground: 0.12 0 0;
+    --sidebar-accent: 0.22 0 0;
+    --sidebar-accent-foreground: 0.8 0 0;
+    --sidebar-border: 0.22 0 0;
+    --sidebar-ring: 0.65 0.16 190;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .result-genuine {
+    border-left: 4px solid oklch(var(--chart-4));
+    background-color: oklch(var(--chart-4) / 0.06);
+  }
+  .result-suspicious {
+    border-left: 4px solid oklch(var(--chart-2));
+    background-color: oklch(var(--chart-2) / 0.06);
+  }
+  .result-fake {
+    border-left: 4px solid oklch(var(--chart-3));
+    background-color: oklch(var(--chart-3) / 0.06);
+  }
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

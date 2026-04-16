@@ -1,0 +1,144 @@
+type http_request_result = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type http_header = 
+ record {
+   name: text;
+   value: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserId = principal;
+type UrlAnalysisResult = 
+ record {
+   fakeCount: nat;
+   genuineCount: nat;
+   reviews: vec ReviewAnalysisItem;
+   sourceUrl: text;
+   totalReviews: nat;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: http_request_result;
+ };
+type Timestamp = int;
+type ReviewAnalysisItem = 
+ record {
+   confidenceScore: nat;
+   explanation: text;
+   isFake: bool;
+   reviewText: text;
+ };
+type PaginatedAnalysesV2 = 
+ record {
+   items: vec AnalysisRecordV2;
+   page: nat;
+   pageSize: nat;
+   total: nat;
+ };
+type PaginatedAnalyses = 
+ record {
+   items: vec AnalysisRecord;
+   page: nat;
+   pageSize: nat;
+   total: nat;
+ };
+type ImageAnalysisResult = 
+ record {
+   authenticityVerdict: text;
+   confidenceScore: nat;
+   explanation: text;
+   imageKey: text;
+   isFake: bool;
+   ocrText: text;
+   ocrVerdict: text;
+   timestamp: Timestamp;
+ };
+type DashboardStatsV2 = 
+ record {
+   averageScore: nat;
+   fakeCount: nat;
+   genuineCount: nat;
+   imageCount: nat;
+   recentAnalyses: vec AnalysisRecordV2;
+   textCount: nat;
+   totalAnalyses: nat;
+   urlCount: nat;
+ };
+type DashboardStats = 
+ record {
+   averageScore: nat;
+   fakeCount: nat;
+   genuineCount: nat;
+   recentAnalyses: vec AnalysisRecord;
+   totalAnalyses: nat;
+ };
+type AnalysisType = 
+ variant {
+   Image;
+   Text;
+   URL;
+ };
+type AnalysisResult = 
+ record {
+   confidenceScore: nat;
+   explanation: text;
+   isFake: bool;
+   timestamp: Timestamp;
+ };
+type AnalysisRecordV2 = 
+ record {
+   analysisType: AnalysisType;
+   confidenceScore: nat;
+   explanation: text;
+   id: AnalysisId;
+   imageKey: opt text;
+   isFake: bool;
+   reviewText: text;
+   sourceUrl: opt text;
+   timestamp: Timestamp;
+   userId: UserId;
+ };
+type AnalysisRecord = 
+ record {
+   confidenceScore: nat;
+   explanation: text;
+   id: AnalysisId;
+   isFake: bool;
+   reviewText: text;
+   timestamp: Timestamp;
+   userId: UserId;
+ };
+type AnalysisId = nat;
+service : {
+  _initializeAccessControl: () -> ();
+  analyzeImage: (imageKey: text) -> (ImageAnalysisResult);
+  analyzeProductUrl: (url: text) -> (UrlAnalysisResult);
+  analyzeReview: (reviewText: text) -> (AnalysisResult);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  clearMyAnalyses: () -> ();
+  deleteAnalysis: (analysisId: AnalysisId) -> (bool);
+  getCallerUserRole: () -> (UserRole) query;
+  getDashboardStats: () -> (DashboardStats) query;
+  getDashboardStatsV2: () -> (DashboardStatsV2) query;
+  getMyAnalyses: (page: nat, pageSize: nat) -> (PaginatedAnalyses) query;
+  getMyAnalysesV2: (page: nat, pageSize: nat, analysisType:
+   opt AnalysisType) -> (PaginatedAnalysesV2) query;
+  isCallerAdmin: () -> (bool) query;
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+  transformV2: (input: TransformationInput) -> (TransformationOutput) query;
+}
